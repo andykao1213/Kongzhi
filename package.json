@@ -5,5 +5,8 @@
   "main": "index.js",
   "repository": "https://github.com/andykao1213/Kongzhi.git",
   "author": "Andrew Kao <andykao1213@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.11.0 || ^17.0.2"
+  }
 }
