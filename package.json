@@ -11,13 +11,28 @@
   },
   "scripts": {
     "dev": "yarn build --watch",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "lint": "eslint --ignore-path .gitignore .",
+    "check-types": "tsc",
+    "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|ts|tsx|json)\"",
+    "format": "yarn prettier --write",
+    "check-format": "yarn prettier --list-different",
+    "validate": "yarn check-types && yarn check-format && yarn lint && yarn build"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
-    "husky": "^6.0.0",
     "@rollup/plugin-typescript": "^8.2.1",
+    "@types/react": "^17.0.4",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react": "^7.23.2",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
+    "react": "^17.0.2",
     "rollup": "^2.45.2",
     "tslib": "^2.2.0",
     "typescript": "^4.2.4"
