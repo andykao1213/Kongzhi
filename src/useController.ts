@@ -1,11 +1,13 @@
 import { useCallback, useMemo, useRef } from "react";
 import { getValueByPath, setValueByPath } from "./libs";
 
+type Subscriber<T = any> = (value: T) => void;
+
 export function useController<T>(initialState: T) {
-  const listeners = useRef<Function[]>([]);
+  const listeners = useRef<Subscriber[]>([]);
   const state = useRef<T>(initialState);
 
-  const subscribe = useCallback((cb: Function) => {
+  const subscribe = useCallback((cb: Subscriber) => {
     listeners.current.push(cb);
   }, []);
 
