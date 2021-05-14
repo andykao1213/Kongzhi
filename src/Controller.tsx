@@ -1,29 +1,32 @@
-import { useEffect, useState, FC, ReactElement, useCallback } from "react";
+import { useEffect, useState, ReactElement, useCallback } from "react";
 import { ControlType } from "./useController";
 
-type PropTypes = {
-  control: ControlType;
+type PropTypes<U, T> = {
+  control: ControlType<U>;
   path: string;
-  render: (value: any, onChange: (newVal: any) => void) => ReactElement;
+  render: (value: T, onChange: (newVal: T) => void) => ReactElement;
 };
 
-export const Controller: FC<PropTypes> = ({ control, path, render }) => {
-  const [value, setValue] = useState(control.getValues("")[path]);
+export function Controller<U, T>({
+  control,
+  path,
+  render,
+}: PropTypes<U, T>): JSX.Element {
+  const [value, setValue] = useState(() => control.getValues<T>(path));
 
   const onChange = useCallback(
-    (newVal: any) => {
+    (newVal: T) => {
       control.updateValue(path, newVal);
     },
     [control, path]
   );
 
   useEffect(() => {
-    control.subscribe((v: any) => {
-      if (v !== value) {
-        setValue(v[path]);
-      }
+    control.subscribe(() => {
+      const nextValue = control.getValues<T>(path);
+      setValue(nextValue);
     });
-  }, [control, value, path]);
+  }, [control, path]);
 
   return render(value, onChange);
-};
+}
