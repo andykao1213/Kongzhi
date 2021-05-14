@@ -1,5 +1,5 @@
-export const getValueByPath = (obj: any, path = "") =>
-  path
+export function getValueByPath<T>(obj: any, path = ""): T {
+  return path
     .replace(/\[(\w+)\]/g, ".$1") // convert indexes to properties
     .replace(/^\./, "") // strip a leading dot
     .split(".")
@@ -7,8 +7,9 @@ export const getValueByPath = (obj: any, path = "") =>
       if (cur in acc) acc = acc[cur];
       return acc;
     }, obj);
+}
 
-export const setValueByPath = (obj: any, path = "", newVal: any) => {
+export function setValueByPath<T>(obj: any, path = "", newVal: T): void {
   const pathInArr = path
     .replace(/\[(\w+)\]/g, ".$1") // convert indexes to properties
     .replace(/^\./, "") // strip a leading dot
@@ -19,4 +20,4 @@ export const setValueByPath = (obj: any, path = "", newVal: any) => {
     return acc;
   }, obj);
   theRef[pathInArr[pathInArr.length - 1]] = newVal;
-};
+}

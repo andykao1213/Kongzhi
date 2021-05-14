@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "A performant react controller",
   "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "repository": "https://github.com/andykao1213/Kongzhi.git",
   "author": "Andrew Kao <andykao1213@gmail.com>",
   "license": "MIT",
