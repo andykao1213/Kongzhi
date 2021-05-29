@@ -9,7 +9,7 @@ export function getValueByPath<T>(obj: any, path = ""): T {
     }, obj);
 }
 
-export function setValueByPath<T>(obj: any, path = "", newVal: T): any {
+export function setValueByPath<T>(obj: any, newVal: T, path = ""): any {
   if (path === "") return newVal;
   const pathInArr = path
     .replace(/\[(\w+)\]/g, ".$1") // convert indexes to properties
