@@ -9,7 +9,8 @@ export function getValueByPath<T>(obj: any, path = ""): T {
     }, obj);
 }
 
-export function setValueByPath<T>(obj: any, path = "", newVal: T): void {
+export function setValueByPath<T>(obj: any, path = "", newVal: T): any {
+  if (path === "") return newVal;
   const pathInArr = path
     .replace(/\[(\w+)\]/g, ".$1") // convert indexes to properties
     .replace(/^\./, "") // strip a leading dot
@@ -20,4 +21,5 @@ export function setValueByPath<T>(obj: any, path = "", newVal: T): void {
     return acc;
   }, obj);
   theRef[pathInArr[pathInArr.length - 1]] = newVal;
+  return obj;
 }

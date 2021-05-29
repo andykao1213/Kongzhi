@@ -14,7 +14,7 @@ function useController<U>(initialState: U): ControlType<U> {
     listeners.current.push(cb);
   }, []);
   const updateValue = useCallback(<Type>(path: string, value: Type): void => {
-    setValueByPath(state.current, path, value);
+    state.current = setValueByPath(state.current, path, value);
     listeners.current.forEach((cb) => {
       cb(state.current);
     });

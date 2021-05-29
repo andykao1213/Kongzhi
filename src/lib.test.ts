@@ -26,25 +26,34 @@ describe("getValueByPath", () => {
 });
 
 describe("setValueByPath", () => {
+  it("set all value should work correctly", () => {
+    const obj = { a: 1, b: 2, c: 3 };
+    const array = [1, 2, 3, 4];
+    const resultObj = setValueByPath(obj, undefined, { a: 11, b: 22 });
+    expect(resultObj).toEqual({ a: 11, b: 22 });
+    const resultArr = setValueByPath(array, undefined, [7, 8, 9]);
+    expect(resultArr).toEqual([7, 8, 9]);
+  });
+
   it("should set correct value to first level", () => {
     const obj = { a: 1, b: 2, c: 3 };
     const array = [1, 2, 3, 4];
-    setValueByPath(obj, "a", 10);
-    expect(obj.a).toBe(10);
-    setValueByPath(array, "2", 10);
-    expect(array[2]).toBe(10);
+    const resultObj = setValueByPath(obj, "a", 10);
+    expect(resultObj.a).toBe(10);
+    const resultArr = setValueByPath(array, "2", 10);
+    expect(resultArr[2]).toBe(10);
   });
 
   it("should set correct value to nested level", () => {
     const obj = { a: { a1: 1, a2: 2 }, c: [3, 4, 5] };
     const array = [null, { a: { a1: 1, a2: 2 }, c: [3, 4, 5] }];
-    setValueByPath(obj, "a.a2", 10);
-    expect(obj.a.a2).toBe(10);
-    setValueByPath(obj, "c[1]", 10);
-    expect(obj.c[1]).toBe(10);
-    setValueByPath(array, "[1].a.a2", -1);
-    expect(array[1]?.a.a2).toBe(-1);
-    setValueByPath(array, "[1].c[2]", -2);
-    expect(array[1]?.c[2]).toBe(-2);
+    const resultObj1 = setValueByPath(obj, "a.a2", 10);
+    expect(resultObj1.a.a2).toBe(10);
+    const resultObj2 = setValueByPath(obj, "c[1]", 10);
+    expect(resultObj2.c[1]).toBe(10);
+    const resultArr1 = setValueByPath(array, "[1].a.a2", -1);
+    expect(resultArr1[1]?.a.a2).toBe(-1);
+    const resultArr2 = setValueByPath(array, "[1].c[2]", -2);
+    expect(resultArr2[1]?.c[2]).toBe(-2);
   });
 });
