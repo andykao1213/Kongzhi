@@ -1,6 +1,13 @@
 import { getValueByPath, setValueByPath } from "./libs";
 
 describe("getValueByPath", () => {
+  it("should get all data correctly", () => {
+    const obj = { a: 1, b: 2, c: 3 };
+    const array = [1, 2, 3, 4];
+    expect(getValueByPath(obj)).toEqual({ a: 1, b: 2, c: 3 });
+    expect(getValueByPath(array)).toEqual([1, 2, 3, 4]);
+  });
+
   it("should get correct data from first level", () => {
     const obj = { a: 1, b: 2, c: 3 };
     const array = [1, 2, 3, 4];
